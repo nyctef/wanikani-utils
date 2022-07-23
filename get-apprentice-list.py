@@ -3,6 +3,10 @@ from pathlib import Path
 from pprint import pprint
 import json
 
+# force utf8 output even if we don't know that the console supports it
+import sys
+sys.stdout.reconfigure(encoding='utf-8')
+
 path_root = Path(__file__).parent.resolve()
 path_api_key = path_root.joinpath('api-key.txt')
 path_apprentice_subjects = path_root.joinpath('cache/apprentice_subjects.json')
