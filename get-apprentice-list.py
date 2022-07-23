@@ -3,12 +3,13 @@ from pathlib import Path
 from pprint import pprint
 import json
 
-api_key = Path('api-key.txt').read_text()
+path_root = Path(__file__).parent.resolve()
+path_api_key = path_root.joinpath('api-key.txt')
+path_apprentice_subjects = path_root.joinpath('cache/apprentice_subjects.json')
 
+api_key = path_api_key.read_text()
 session = requests.Session()
 session.headers.update({'Authorization': f'Bearer {api_key}'})
-
-path_apprentice_subjects = Path('cache/apprentice_subjects.json')
 
 def download_apprentice_subjects():
     # srs_systems = session.get('https://api.wanikani.com/v2/spaced_repetition_systems/').json()
