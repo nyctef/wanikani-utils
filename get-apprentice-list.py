@@ -21,10 +21,23 @@ def download_apprentice_subjects():
 def convert_subjects_to_anki():
     apprentice_subjects_json = path_apprentice_subjects.read_text(encoding='utf8')
     apprentice_subjects = json.loads(apprentice_subjects_json)
-    pprint(apprentice_subjects)
+    print("prompt\tresponse")
+    for item in apprentice_subjects['data']:
+        item_type = item['object']
+        item_text = item['data']['characters']
+        item_meanings = ', '.join([x['meaning'] for x in item['data']['meanings'] if x['accepted_answer']])
+        item_readings = 'readings' in item['data'] and ', '.join([x['reading'] for x in item['data']['readings'] if x['accepted_answer']])
+        if item_type == 'radical':
+            print(f"{item_type}: {item_text}\t{item_meanings}")
+        elif item_type in ('kanji', 'vocabulary'):
+            print(f"{item_type} meaning: {item_text}\t{item_meanings}")
+            print(f"{item_type} reading: {item_text}\t{item_readings}")
+        else:
+            raise Error(item['object'])
+    # pprint(apprentice_subjects)
 
 if __name__ == '__main__':
-    if path_apprentice_subjects.exists():
-        convert_subjects_to_anki()
-    else:
+    if not path_apprentice_subjects.exists():
         download_apprentice_subjects()
+
+    convert_subjects_to_anki()
