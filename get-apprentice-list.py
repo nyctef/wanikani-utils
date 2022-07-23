@@ -34,8 +34,7 @@ def convert_subjects_to_anki():
         if item_type == 'radical':
             print(f"{item_type}: {item_text}\t{item_meanings}")
         elif item_type in ('kanji', 'vocabulary'):
-            print(f"{item_type} meaning: {item_text}\t{item_meanings}")
-            print(f"{item_type} reading: {item_text}\t{item_readings}")
+            print(f'"{item_type}: {item_text}"\t"{item_meanings}\n{item_readings}"')
         else:
             raise Error(item['object'])
     # pprint(apprentice_subjects)
