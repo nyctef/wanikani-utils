@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 requests = "*"
-psycopg = "*"
+psycopg = {extras = ["binary"], version = "*"}
 
 [dev-packages]
 
