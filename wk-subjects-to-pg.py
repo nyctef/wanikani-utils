@@ -15,11 +15,18 @@ session = requests.Session()
 session.headers.update({'Authorization': f'Bearer {api_key}'})
 
 db_str = path_db_str.read_text()
-
-one_assignment_for_now = session.get('https://api.wanikani.com/v2/subjects', params={'ids': '10'}).json()
-id = one_assignment_for_now['data'][0]['id']
-data = one_assignment_for_now['data'][0]['data']
-
 with psycopg.connect(db_str) as conn:
     with conn.cursor() as cur:
-        cur.execute("""INSERT INTO subjects (id, subject_data) VALUES (%s, %s);""", (id, Jsonb(data)))
+        url = 'https://api.wanikani.com/v2/subjects'
+        while url is not None:
+            print(url)
+            page = session.get(url).json()
+            for item in page['data']:
+                id = item['id']
+                data = item['data']
+
+                print('.', end='')
+                cur.execute("""INSERT INTO subjects (id, subject_data) VALUES (%s, %s);""", (id, Jsonb(data)))
+
+            print()
+            url = page['pages']['next_url']
