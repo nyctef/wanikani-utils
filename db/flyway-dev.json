@@ -1,0 +1,17 @@
+{
+  "version": "2.0",
+  "name": "db",
+  "id": "6db2ff8a-d28b-4846-b002-ccfc7feb44cd",
+  "databaseType": "PostgreSql",
+  "schemas": [
+    "public"
+  ],
+  "development": {
+    "scriptsFolder": "./schema-model"
+  },
+  "deployment": {
+    "flywayConfFiles": [
+      "./flyway.conf"
+    ]
+  }
+}

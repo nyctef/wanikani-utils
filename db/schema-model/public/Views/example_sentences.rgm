@@ -1,0 +1,32 @@
+{
+  "objects": [
+    {
+      "objectType": "view",
+      "fullName": "\"public\".\"example_sentences\"",
+      "text": "WITH data(level, chars, sentence) AS (\n         SELECT ((subjects.subject_data -> 'level'::text))::integer AS int4,\n            (subjects.subject_data #>> '{characters}'::text[]),\n            jsonb_array_elements((subjects.subject_data #> '{context_sentences}'::text[])) AS jsonb_array_elements\n           FROM public.subjects\n        )\n SELECT data.level,\n    data.chars AS subject,\n    (data.sentence ->> 'en'::text) AS english,\n    (data.sentence ->> 'ja'::text) AS japanese\n   FROM data\n  ORDER BY data.level, data.chars;",
+      "kind": "MATERIALIZED",
+      "columns": [
+        {
+          "objectType": "column",
+          "fullName": "\"level\"",
+          "type": "integer"
+        },
+        {
+          "objectType": "column",
+          "fullName": "\"subject\"",
+          "type": "text"
+        },
+        {
+          "objectType": "column",
+          "fullName": "\"english\"",
+          "type": "text"
+        },
+        {
+          "objectType": "column",
+          "fullName": "\"japanese\"",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}

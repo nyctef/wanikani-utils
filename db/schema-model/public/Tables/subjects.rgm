@@ -1,0 +1,31 @@
+{
+  "objects": [
+    {
+      "objectType": "table",
+      "fullName": "\"public\".\"subjects\"",
+      "columns": [
+        {
+          "objectType": "column",
+          "fullName": "\"id\"",
+          "type": "integer",
+          "null": "NOT NULL"
+        },
+        {
+          "objectType": "column",
+          "fullName": "\"subject_data\"",
+          "type": "jsonb",
+          "null": "NOT NULL"
+        }
+      ],
+      "primaryKeys": [
+        {
+          "objectType": "primaryKey",
+          "fullName": "\"subjects_pkey\"",
+          "columns": [
+            "\"id\""
+          ]
+        }
+      ]
+    }
+  ]
+}
