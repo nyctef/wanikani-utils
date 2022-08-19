@@ -1,0 +1,14 @@
+{
+  "objects": [
+    {
+      "objectType": "index",
+      "fullName": "\"public\".\"idx_kanji_by_wk_radicals_components\"",
+      "table": "\"public\".\"kanji_by_wk_radicals\"",
+      "type": "gin",
+      "columns": [
+        "\"components\""
+      ],
+      "isUnique": "False"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "objects": [
+    {
+      "objectType": "function",
+      "fullName": "\"public\".\"radical_from_id(integer)\"",
+      "text": "\r\n    select subject_data ->> 'slug'\r\n    from subjects\r\n    where id = $1\r\n",
+      "returnType": "text",
+      "arguments": [
+        {
+          "name": "id",
+          "type": "integer",
+          "mode": "IN"
+        }
+      ],
+      "language": "sql"
+    }
+  ]
+}

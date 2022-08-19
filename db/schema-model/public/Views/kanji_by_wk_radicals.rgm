@@ -1,0 +1,27 @@
+{
+  "objects": [
+    {
+      "objectType": "view",
+      "fullName": "\"public\".\"kanji_by_wk_radicals\"",
+      "text": "SELECT x.id,\n    x.characters,\n    x.components\n   FROM ( SELECT subjects.id,\n            (subjects.subject_data ->> 'characters'::text),\n            ARRAY( SELECT public.radical_from_id((x_1.value)::integer) AS radical_from_id\n                   FROM jsonb_array_elements((subjects.subject_data -> 'component_subject_ids'::text)) x_1(value)) AS \"array\"\n           FROM public.subjects\n          WHERE ((subjects.subject_data -> 'visually_similar_subject_ids'::text) <> 'null'::jsonb)) x(id, characters, components)\n  WHERE (array_length(x.components, 1) <> 0)\n  ORDER BY x.id;",
+      "kind": "MATERIALIZED",
+      "columns": [
+        {
+          "objectType": "column",
+          "fullName": "\"id\"",
+          "type": "integer"
+        },
+        {
+          "objectType": "column",
+          "fullName": "\"characters\"",
+          "type": "text"
+        },
+        {
+          "objectType": "column",
+          "fullName": "\"components\"",
+          "type": "\"text[]\""
+        }
+      ]
+    }
+  ]
+}
