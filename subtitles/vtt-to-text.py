@@ -1,5 +1,6 @@
 import webvtt
 import sys
+sys.stdout.reconfigure(encoding='utf-8')
 
 if len(sys.argv) <= 1:
     print("Usage: [path/to/subtitles.vtt]")
