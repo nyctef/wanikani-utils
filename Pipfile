@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 requests = "*"
 psycopg = {extras = ["binary"], version = "*"}
+webvtt-py = "*"
 
 [dev-packages]
 
