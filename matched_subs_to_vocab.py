@@ -1,6 +1,7 @@
 from pathlib import Path
 from collections import defaultdict
 from pprint import pprint
+from multiprocessing import Pool
 import sys
 import csv
 
@@ -28,15 +29,10 @@ def main():
     lines = Path(path).read_text(encoding="utf-8").splitlines()
     # lines = lines[0:1000]
     table = csv.reader(lines, delimiter="\t")
-
     jps = [x[1] for x in table]
-    parsed = []
-    count = 0
-    for jp in jps:
-        count += 1
-        if count % 1000 == 0:
-            print(".", end="")
-        parsed.append(run_nagisa(jp))
+
+    with Pool() as multiprocessor_pool:
+        parsed = multiprocessor_pool.map(run_nagisa, jps)
 
     result_by_count = defaultdict(int)
     for parsed_line in parsed:
