@@ -1,10 +1,13 @@
-import nagisa
 from pathlib import Path
-from pprint import pprint
 from collections import defaultdict
 import re
 import sys
-sys.stdout.reconfigure(encoding='utf-8')
+
+import nagisa
+
+from python_utils import ensure_utf8_stdout
+
+ensure_utf8_stdout()
 
 if len(sys.argv) <= 1:
     print("Usage: [path/to/file.txt]")
@@ -12,7 +15,7 @@ if len(sys.argv) <= 1:
 
 path = sys.argv[1]
 
-text = Path(path).read_text(encoding='utf-8')
+text = Path(path).read_text(encoding="utf-8")
 
 # run nagisa against the file
 result = nagisa.tagging(text)

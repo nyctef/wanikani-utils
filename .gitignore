@@ -2,3 +2,4 @@ api-key.txt
 db-str.txt
 cache/
 scratch/
+__pycache__/
