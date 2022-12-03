@@ -1,0 +1,20 @@
+[tool.pylint.main]
+# set line length to 88 to agree with the `black` formatter
+max-line-length = "88"
+
+disable = [
+    # docstrings are nice, but we don't care enough to enforce their usage
+    "missing-function-docstring",
+    "missing-module-docstring",
+    "missing-class-docstring"
+]
+
+good-names = [
+    # by default pylint doesn't like variable names shorter than three characters
+    # but we think the following should be allowed:
+
+    # f is a common variable name in `with open(file) as f:`
+    "f",
+    # e is common in `except Exception as e:`
+    "e"
+]
